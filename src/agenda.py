@@ -54,7 +54,7 @@ def agregar_contacto(contactos_lista:list):
     while not todo_ok:
         try:
             agregar = input("Desea agregar un contacto? (s/n)").lower()
-            if agregar not in {"s","n","si","no"}:
+            if agregar not in {"s","si"}:
                 raise ValueError(print("Error, introduzca un valor válido."))
             else:
                 nombre = input("Introduzca un nombre -> ").capitalize().strip()
@@ -89,10 +89,10 @@ def cargar_contactos(contactos: list):
     ...
     """
     
-    contactos_lista = [{"nombre":, "apellido": , "email": , "telefonos": }]
+    contactos_lista = [{"nombre":"", "apellido":"" , "email": "", "telefonos": "" }]
     
     #TODO: Controlar los posibles problemas derivados del uso de ficheros...
-
+    #cambiar el print para que se meta en contactos
     with open(RUTA_FICHERO, 'r') as fichero:
         for linea in fichero:
             print(linea)

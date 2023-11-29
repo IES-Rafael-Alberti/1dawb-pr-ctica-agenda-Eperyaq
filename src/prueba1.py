@@ -22,17 +22,16 @@ def agregar_contacto():
                 nombre = input("Introduzca un nombre -> ").capitalize().strip()
                 if nombre =="":
                     raise ValueError
-                #contactos_lista["nombre"] = nombre
-                contactos_lista.append(nombre)
+                contactos_lista[0]["nombre"] = nombre
                 
                 apellidos = input("Introduzca su apellido -> ")
-                contactos_lista["apellido"] = apellidos
+                contactos_lista[0]["apellido"] = apellidos
                 
                 email = input("Introduzca un email -> ")
-                contactos_lista["email"]=email
+                contactos_lista[0]["email"]=email
                 
                 telefono = input("Introduzca su telefono/s -> ")
-                contactos_lista["telefono"]=telefono
+                contactos_lista[0]["telefono"]=telefono
         except ValueError:
             print("No puedes dejar el campo vacío.")
 
