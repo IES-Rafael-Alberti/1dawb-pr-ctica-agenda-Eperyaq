@@ -26,7 +26,7 @@ NOMBRE_FICHERO = 'contactos.csv'
 RUTA_FICHERO = path.join(RUTA, NOMBRE_FICHERO)
 
 #TODO: Crear un conjunto con las posibles opciones del menú de la agenda
-OPCIONES_MENU = ?
+OPCIONES_MENU = {1, 2, 3, 4, 5}
 #TODO: Utiliza este conjunto en las funciones agenda() y pedir_opcion()
 
 
@@ -39,15 +39,67 @@ def borrar_consola():
         os.system ("cls")
 
 
+def agregar_contacto(contactos_lista:list):
+    #TODO: Crear función para agregar un contacto. Debes tener en cuenta lo siguiente:
+    # - El nombre y apellido no pueden ser una cadena vacía o solo espacios y se guardarán con la primera letra mayúscula y el resto minúsculas (ojo a los nombre compuestos)
+    # - El email debe ser único en la lista de contactos, no puede ser una cadena vacía y debe contener el carácter @.
+    # - El email se guardará tal cuál el usuario lo introduzca, con las mayúsculas y minúsculas que escriba. 
+    #  (CORREO@gmail.com se considera el mismo email que correo@gmail.com)
+    # - Pedir teléfonos hasta que el usuario introduzca una cadena vacía, es decir, que pulse la tecla <ENTER> sin introducir nada.
+    # - Un teléfono debe estar compuesto solo por 9 números, aunque debe permitirse que se introduzcan espacios entre los números.
+    # - Además, un número de teléfono puede incluir de manera opcional un prefijo +34.
+    # - De igual manera, aunque existan espacios entre el prefijo y los 9 números al introducirlo, debe almacenarse sin espacios.
+    # - Por ejemplo, será posible introducir el número +34 600 100 100, pero guardará +34600100100 y cuando se muestren los contactos, el telófono se mostrará como +34-600100100.
+    todo_ok = False
+    while not todo_ok:
+        try:
+            agregar = input("Desea agregar un contacto? (s/n)").lower()
+            if agregar not in {"s","n","si","no"}:
+                raise ValueError(print("Error, introduzca un valor válido."))
+            else:
+                nombre = input("Introduzca un nombre -> ").capitalize().strip()
+                if nombre =="":
+                    raise ValueError(print("*ERROR, no pueden dejar el campo vacío."))
+                contactos_lista["nombre"] = nombre
+                
+                apellidos = input("Introduzca su apellido -> ")
+                contactos_lista["apellido"] = apellidos
+                
+                email = input("Introduzca un email -> ")
+                contactos_lista["email"]=email
+                
+                telefono = input("Introduzca su telefono/s -> ")
+                contactos_lista["telefono"]=telefono
+        except Exception:
+            print("**ERROR**")
+        
+    else:
+        mostrar_menu()
+    
+    
+    
+    
+    
+    
+""""""    
 def cargar_contactos(contactos: list):
+    #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos)
+    
     """ Carga los contactos iniciales de la agenda desde un fichero
     ...
     """
+    
+    contactos_lista = [{"nombre":, "apellido": , "email": , "telefonos": }]
+    
     #TODO: Controlar los posibles problemas derivados del uso de ficheros...
 
     with open(RUTA_FICHERO, 'r') as fichero:
         for linea in fichero:
             print(linea)
+            
+
+def buscar_contacto():
+    print()
 
 
 def eliminar_contacto(contactos: list, email: str):
@@ -94,12 +146,12 @@ def main():
     """
     borrar_consola()
 
-    #TODO: Asignar una estructura de datos vacía para trabajar con la agenda
-    contactos = ?
+    #TODO: Asignar una estructura de datos vacía para trabajar con la agenda -> HECHO
+    contactos = []
 
-    #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos)
+    #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos) -> HECHO
     #TODO: Realizar una llamada a la función cargar_contacto con todo lo necesario para que funcione correctamente.
-    cargar_contactos(?)
+    cargar_contactos(contactos)
 
     #TODO: Crear función para agregar un contacto. Debes tener en cuenta lo siguiente:
     # - El nombre y apellido no pueden ser una cadena vacía o solo espacios y se guardarán con la primera letra mayúscula y el resto minúsculas (ojo a los nombre compuestos)
@@ -111,6 +163,8 @@ def main():
     # - Además, un número de teléfono puede incluir de manera opcional un prefijo +34.
     # - De igual manera, aunque existan espacios entre el prefijo y los 9 números al introducirlo, debe almacenarse sin espacios.
     # - Por ejemplo, será posible introducir el número +34 600 100 100, pero guardará +34600100100 y cuando se muestren los contactos, el telófono se mostrará como +34-600100100. 
+    
+    
     #TODO: Realizar una llamada a la función agregar_contacto con todo lo necesario para que funcione correctamente.
     agregar_contacto(?)
 
