@@ -17,6 +17,7 @@ Práctica del examen para realizar en casa
 import os
 import pathlib
 from os import path
+from agregar_contacto import agregar_contacto
 
 # Constantes globales
 RUTA = pathlib.Path(__file__).parent.absolute() 
@@ -24,6 +25,8 @@ RUTA = pathlib.Path(__file__).parent.absolute()
 NOMBRE_FICHERO = 'contactos.csv'
 
 RUTA_FICHERO = path.join(RUTA, NOMBRE_FICHERO)
+
+DIMENSIONES = 6
 
 #TODO: Crear un conjunto con las posibles opciones del menú de la agenda
 OPCIONES_MENU = {1, 2, 3, 4, 5}
@@ -39,49 +42,7 @@ def borrar_consola():
         os.system ("cls")
 
 
-def agregar_contacto(contactos_lista:list):
-    #TODO: Crear función para agregar un contacto. Debes tener en cuenta lo siguiente:
-    # - El nombre y apellido no pueden ser una cadena vacía o solo espacios y se guardarán con la primera letra mayúscula y el resto minúsculas (ojo a los nombre compuestos)
-    # - El email debe ser único en la lista de contactos, no puede ser una cadena vacía y debe contener el carácter @.
-    # - El email se guardará tal cuál el usuario lo introduzca, con las mayúsculas y minúsculas que escriba. 
-    #  (CORREO@gmail.com se considera el mismo email que correo@gmail.com)
-    # - Pedir teléfonos hasta que el usuario introduzca una cadena vacía, es decir, que pulse la tecla <ENTER> sin introducir nada.
-    # - Un teléfono debe estar compuesto solo por 9 números, aunque debe permitirse que se introduzcan espacios entre los números.
-    # - Además, un número de teléfono puede incluir de manera opcional un prefijo +34.
-    # - De igual manera, aunque existan espacios entre el prefijo y los 9 números al introducirlo, debe almacenarse sin espacios.
-    # - Por ejemplo, será posible introducir el número +34 600 100 100, pero guardará +34600100100 y cuando se muestren los contactos, el telófono se mostrará como +34-600100100.
-    todo_ok = False
-    while not todo_ok:
-        try:
-            agregar = input("Desea agregar un contacto? (s/n)").lower()
-            if agregar not in {"s","si"}:
-                raise ValueError(print("Error, introduzca un valor válido."))
-            else:
-                nombre = input("Introduzca un nombre -> ").capitalize().strip()
-                if nombre =="":
-                    raise ValueError(print("*ERROR, no pueden dejar el campo vacío."))
-                contactos_lista["nombre"] = nombre
-                
-                apellidos = input("Introduzca su apellido -> ")
-                contactos_lista["apellido"] = apellidos
-                
-                email = input("Introduzca un email -> ")
-                contactos_lista["email"]=email
-                
-                telefono = input("Introduzca su telefono/s -> ")
-                contactos_lista["telefono"]=telefono
-        except Exception:
-            print("**ERROR**")
-        
-    else:
-        mostrar_menu()
-    
-    
-    
-    
-    
-    
-""""""    
+   
 def cargar_contactos(contactos: list):
     #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos)
     
@@ -89,7 +50,7 @@ def cargar_contactos(contactos: list):
     ...
     """
     
-    contactos_lista = [{"nombre":"", "apellido":"" , "email": "", "telefonos": "" }]
+    contactos_lista = [{"nombre":"", "apellido":"" , "telefonos": "" }]
     
     #TODO: Controlar los posibles problemas derivados del uso de ficheros...
     #cambiar el print para que se meta en contactos
@@ -132,7 +93,32 @@ def agenda(contactos: list):
         #TODO: Se valorará que utilices la diferencia simétrica de conjuntos para comprobar que la opción es un número entero del 1 al 6
         if opcion in ?:
 
-
+def mostrar_menu():
+    print("Menú: ")
+    print("1. Agregar ")
+    print("2. Mirar ")
+    print("3. Borrar ")
+    print("4. Salir")
+    todo_ok = False
+    while not todo_ok:
+        try:
+            opcion = int(input("Escoge una opcion: "))
+            todo_ok = True
+        except ValueError:
+            ("ERROR numero incorrecto")
+    
+    return opcion
+    
+def pedir_opcion(opcion:int):
+    if opcion == 1:
+        agregar_contacto()
+    elif opcion == 2:
+        mirar()
+    elif opcion == 3:
+        borrar()
+    elif opcion == 4:
+        salir()
+    
 
 def pulse_tecla_para_continuar():
     """ Muestra un mensaje y realiza una pausa hasta que se pulse una tecla
@@ -147,11 +133,11 @@ def main():
     borrar_consola()
 
     #TODO: Asignar una estructura de datos vacía para trabajar con la agenda -> HECHO
-    contactos = []
+    contactos_generales = {}
 
     #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos) -> HECHO
     #TODO: Realizar una llamada a la función cargar_contacto con todo lo necesario para que funcione correctamente.
-    cargar_contactos(contactos)
+    cargar_contactos(contactos_generales)
 
     #TODO: Crear función para agregar un contacto. Debes tener en cuenta lo siguiente:
     # - El nombre y apellido no pueden ser una cadena vacía o solo espacios y se guardarán con la primera letra mayúscula y el resto minúsculas (ojo a los nombre compuestos)
@@ -166,7 +152,7 @@ def main():
     
     
     #TODO: Realizar una llamada a la función agregar_contacto con todo lo necesario para que funcione correctamente.
-    agregar_contacto(?)
+    agregar_contacto(contactos_lista)
 
     pulse_tecla_para_continuar()
     borrar_consola()
