@@ -28,7 +28,7 @@ def agregar_contacto():
     # - Por ejemplo, será posible introducir el número +34 600 100 100, pero guardará +34600100100 y cuando se muestren los contactos, el telófono se mostrará como +34-600100100.
     
     lista_correos = []
-    contactos_lista = [{"nombre":"", "apellidos":"" , "telefonos": "" }]
+    contactos_lista = [{"nombre":"", "apellidos":"" ,"email":"", "telefonos": [] }] #METER UNA LISTA EN TELEFONOS QUE NO SE
     contactos_generales = {}
     salir = False
  
@@ -71,7 +71,9 @@ def agregar_contacto():
                     print("ERROR, el numero de telefono no puede tener más de 9 caracteres.")  
                 else:  
                     contactos_lista[0]["telefonos"]=telefono_str
-            #si me ponen mas de un telefono lo que hace es reemplazar por el valor nuevo
+                #    contactos_lista[1].append(telefono_int)
+                #validar que tenga el +34
+                #meterlo en una lista por fuera y despues añadirlo al diccionario QUIZAS
         print("contacto creado correctamente")
     
     except ValueError:

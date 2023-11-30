@@ -1,5 +1,3 @@
-DIMENSIONES = 6
-MENUSES = " "
 def mostrar_menu():
     print("AGENDA: ")
     print("---------------")

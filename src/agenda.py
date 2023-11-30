@@ -26,10 +26,8 @@ NOMBRE_FICHERO = 'contactos.csv'
 
 RUTA_FICHERO = path.join(RUTA, NOMBRE_FICHERO)
 
-DIMENSIONES = 6
-
 #TODO: Crear un conjunto con las posibles opciones del menú de la agenda
-OPCIONES_MENU = {1, 2, 3, 4, 5}
+OPCIONES_MENU = {1, 2, 3, 4, 5, 6, 7, 8}
 #TODO: Utiliza este conjunto en las funciones agenda() y pedir_opcion()
 
 
@@ -50,7 +48,7 @@ def cargar_contactos(contactos: list):
     ...
     """
     
-    contactos_lista = [{"nombre":"", "apellido":"" , "telefonos": "" }]
+    contactos_lista = [{"nombre":"", "apellido":"",  "email": "", "telefonos": "" }]
     
     #TODO: Controlar los posibles problemas derivados del uso de ficheros...
     #cambiar el print para que se meta en contactos
@@ -86,38 +84,44 @@ def agenda(contactos: list):
     """
     #TODO: Crear un bucle para mostrar el menú y ejecutar las funciones necesarias según la opción seleccionada...
 
-    while opcion != 7:
+    while opcion != 8:
         mostrar_menu()
         opcion = pedir_opcion()
 
-        #TODO: Se valorará que utilices la diferencia simétrica de conjuntos para comprobar que la opción es un número entero del 1 al 6
+        #TODO: Se valorará que utilices la diferencia simétrica de conjuntos para comprobar que la opción es un número entero del 1 al 7
+        #no entiendo
+        #conjunto de opciones y un conjunto solo con un 8
+        OPCIONES_MENU ^ {8}
+
         if opcion in ?:
 
 def mostrar_menu():
-    print("Menú: ")
-    print("1. Agregar ")
-    print("2. Mirar ")
-    print("3. Borrar ")
-    print("4. Salir")
+    print("AGENDA: ")
+    print("---------------")
+    print("1. Nuevo contacto ")
+    print("2. Modificar contacto ")
+    print("3. Eliminar contacto ")
+    print("4. Vaciar agenda")
+    print("5. Cargar agenda inicial")
+    print("6. Mostrar contacto por criterio")
+    print("7. Mostrar agenda completa")
+    print("8. Salir")
+
+    
     todo_ok = False
     while not todo_ok:
         try:
-            opcion = int(input("Escoge una opcion: "))
+            opcion = int(input("Escoge una opcion >> "))
             todo_ok = True
         except ValueError:
-            ("ERROR numero incorrecto")
+            ("ERROR, numero incorrecto")
     
     return opcion
     
 def pedir_opcion(opcion:int):
-    if opcion == 1:
-        agregar_contacto()
-    elif opcion == 2:
-        mirar()
-    elif opcion == 3:
-        borrar()
-    elif opcion == 4:
-        salir()
+    for opciones in range (OPCIONES_MENU):
+        print("Arreglar esto-----------------------------------------------")
+        
     
 
 def pulse_tecla_para_continuar():
@@ -137,6 +141,7 @@ def main():
 
     #TODO: Modificar la función cargar_contactos para que almacene todos los contactos del fichero en una lista con un diccionario por contacto (claves: nombre, apellido, email y telefonos) -> HECHO
     #TODO: Realizar una llamada a la función cargar_contacto con todo lo necesario para que funcione correctamente.
+
     cargar_contactos(contactos_generales)
 
     #TODO: Crear función para agregar un contacto. Debes tener en cuenta lo siguiente:

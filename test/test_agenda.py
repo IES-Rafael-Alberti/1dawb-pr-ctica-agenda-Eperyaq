@@ -37,7 +37,7 @@ def test_cargar_contactos(contactos_iniciales):
     cargar_contactos(contactos)
     assert contactos == contactos_iniciales
 
-
+#QUITAR BOOLEANO
 def test_validar_email(contactos_iniciales):
     with pytest.raises(ValueError, match="el email no puede ser una cadena vacía"):
         validar_email("", contactos_iniciales, False)
