@@ -3,6 +3,9 @@ def clean_terminal():
     if os.name == "nt":
         os.system("cls")
         
+
+    
+    
 def agregar_contacto():
     """Agrega contactos a la base de datos
     
@@ -26,7 +29,7 @@ def agregar_contacto():
     
     # - De igual manera, aunque existan espacios entre el prefijo y los 9 números al introducirlo, debe almacenarse sin espacios.
     # - Por ejemplo, será posible introducir el número +34 600 100 100, pero guardará +34600100100 y cuando se muestren los contactos, el telófono se mostrará como +34-600100100.
-    
+    prefijo = "+34"
     lista_correos = []
     contactos_lista = [{"nombre":"", "apellidos":"" ,"email":"", "telefonos": [] }] #METER UNA LISTA EN TELEFONOS QUE NO SE
     contactos_generales = {}
@@ -67,14 +70,15 @@ def agregar_contacto():
                 if telefono_int =="":
                     salir=True
                         
-                if len(telefono_str) > 9:
-                    print("ERROR, el numero de telefono no puede tener más de 9 caracteres.")  
+                if len(telefono_str) != 9:
+                    print("ERROR, el numero de telefono debe tener 9 caracteres.")  
+                    
+                elif telefono_str.startswith(prefijo):
+                    contactos_lista[0]["telefonos"].append(telefono_int)
                 else:  
-                    contactos_lista[0]["telefonos"]=telefono_str
-                #    contactos_lista[1].append(telefono_int)
+                    contactos_lista[0]["telefonos"].append(telefono_int)
                 #validar que tenga el +34
-                #meterlo en una lista por fuera y despues añadirlo al diccionario QUIZAS
-        print("contacto creado correctamente")
+            print("contacto creado correctamente")
     
     except ValueError:
         print("No puedes introducir letras en el numero de telefono.")
@@ -89,6 +93,7 @@ def mostrar_menu():
         
 def main():
     clean_terminal()
+
     agregar_contacto()
     
     
