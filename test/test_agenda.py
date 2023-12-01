@@ -2,7 +2,7 @@ import copy
 from os import path
 import pathlib
 import pytest
-
+#cambiar el import 
 from ExamenU3.agenda_solucion_doc import(
     cargar_contactos,
     validar_email,
@@ -37,7 +37,7 @@ def test_cargar_contactos(contactos_iniciales):
     cargar_contactos(contactos)
     assert contactos == contactos_iniciales
 
-
+#QUITAR BOOLEANO
 def test_validar_email(contactos_iniciales):
     with pytest.raises(ValueError, match="el email no puede ser una cadena vacía"):
         validar_email("", contactos_iniciales, False)
